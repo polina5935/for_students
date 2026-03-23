@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Готовимся к ЕГЭ 2026!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        body {
+            background: #f0f7ff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+            padding: 24px 20px 40px 20px;
+            position: relative;
+            z-index: 3;
+        }
+        h1 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            background: #eef2ff;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #1e3c72;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .back-link:hover {
+            background: #d9e4ff;
+        }
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .student-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            padding: 20px 12px 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e2edff;
+        }
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 28px rgba(0,0,0,0.1);
+            border-color: #b9d0ff;
+            background: rgba(255, 255, 255, 0.98);
+        }
+        .student-icon {
+            font-size: 64px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80px;
+        }
+        .student-icon img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+        .student-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 6px;
+        }
+        .student-detail {
+            background: #ffffff;
+        }
+        .student-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eef2ff;
+            padding-bottom: 20px;
+        }
+        .student-detail-icon {
+            font-size: 70px;
+        }
+        .student-detail-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin: 0;
+        }
+        .lesson-link {
+            background: #eef2ff;
+            padding: 14px 24px;
+            border-radius: 60px;
+            margin: 20px 0 30px 0;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            color: #1e3c72;
+            transition: 0.2s;
+            border: 1px solid #cbdffc;
+        }
+        .lesson-link:hover {
+            background: #dfe9ff;
+            transform: scale(1.02);
+        }
+        .files-section {
+            margin-top: 30px;
+            background: #f9fcff;
+            border-radius: 28px;
+            padding: 20px;
+        }
+        .files-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-top: 0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .file-list li {
+            background: white;
+            margin: 12px 0;
+            border-radius: 20px;
+            border: 1px solid #e2edff;
+            transition: 0.1s;
+        }
+        .file-list a {
+            display: block;
+            padding: 14px 20px;
+            text-decoration: none;
+            color: #2c5a9e;
+            font-weight: 500;
+            border-radius: 20px;
+        }
+        .file-list a:hover {
+            background: #eef4ff;
+            color: #0f2b4f;
+        }
+        /* Стили для вложенных списков (группировка файлов) */
+        details {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e2edff;
+            margin: 12px 0;
+            padding: 0;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #2c5a9e;
+            padding: 14px 20px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: '📁';
+            font-size: 1.2rem;
+        }
+        details[open] summary::before {
+            content: '📂';
+        }
+        details ul {
+            list-style: none;
+            margin: 0;
+            padding: 0 20px 20px 20px;
+            border-top: 1px solid #e2edff;
+        }
+        details ul li {
+            margin: 8px 0;
+            background: #f9fcff;
+            border-radius: 16px;
+            border: none;
+        }
+        details ul li a {
+            display: block;
+            padding: 12px 16px;
+            background: #f9fcff;
+            border-radius: 16px;
+            color: #2c5a9e;
+        }
+        details ul li a:hover {
+            background: #eef4ff;
+        }
+        .empty-lessons {
+            color: #6b7c93;
+            background: #ffffffd9;
+            padding: 20px;
+            border-radius: 24px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #7c8ea0;
+        }
+        /* Декоративные графики по углам */
+        .corner-graph {
+            position: fixed;
+            width: 180px;
+            height: 180px;
+            pointer-events: none;
+            opacity: 0.65;
+            z-index: 1;
+        }
+        .corner-graph canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .top-left { top: 20px; left: 20px; }
+        .top-right { top: 20px; right: 20px; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        .bottom-right { bottom: 20px; right: 20px; }
+
+        /* Цветок снизу по центру */
+        .flower-pot {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .flower-pot img {
+            width: 480px;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 700px) {
+            .corner-graph { width: 120px; height: 120px; }
+            .flower-pot img { width: 70px; }
+            .student-icon img { width: 50px; height: 50px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <div style="text-align: center; padding: 40px;">Загрузка...</div>
+</div>
+
+<script>
+    // *********************************************************************
+    // **********  ДАННЫЕ УЧЕНИКОВ (РЕДАКТИРУЙТЕ ЗДЕСЬ)  ******************
+    // *********************************************************************
+    const studentsData = [
+        {
+            id: "anya",
+            name: "Аня",
+            icon: "", 
+            iconImg: "icons/Anya.png",             
+            meetingLink: "",
+            lessons: [{ title: "Материалы к занятию 26.03.26", fileUrl: "lessons/Anya/" },
+            { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Anya/" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "varya",
+            name: "Варя",
+            icon: "",
+            iconImg: "icons/Varya.png",
+            meetingLink: "",
+            lessons: [{ title: "Материалы к занятию 26.03.26", fileUrl: "lessons/Varya/" },
+            { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Varya/" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "marta",
+            name: "Марта",
+            icon: "",
+            iconImg: "icons/Marta.png",
+            meetingLink: "",
+            lessons: [
+                { title: "Материалы к занятию 23.03.26", fileUrl: "lessons/Marta/23.03.26.pdf" },
+                { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Marta/IMG_6476.jpg" },
+                        { name: "Страница 2", url: "homework/Marta/IMG_6477.jpg" },
+                        { name: "Страница 3", url: "homework/Marta/IMG_6478.jpg" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "lera",
+            name: "Лера",
+            icon: "",
+            iconImg: "icons/Lera.png",
+            meetingLink: "",
+            lessons: [{ title: "Материалы к занятию 26.03.26", fileUrl: "lessons/Lera/" },
+            { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Lera/" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "nastya",
+            name: "Настя",
+            icon: "",
+            iconImg: "icons/Nastya.png",
+            meetingLink: "",
+            lessons: [{ title: "Материалы к занятию 26.03.26", fileUrl: "lessons/Nastya/" },
+            { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Nastya/" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "natasha",
+            name: "Наташа",
+            icon: "",
+            iconImg: "icons/Natasha.png",
+            meetingLink: "",
+            lessons: [{ title: "Материалы к занятию 26.03.26", fileUrl: "lessons/Nastya/" },
+            { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Nastya/" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "sonya",
+            name: "Соня",
+            icon: "",
+            iconImg: "icons/Sonya.png",
+            meetingLink: "",
+            lessons: [{ title: "Материалы к занятию 26.03.26", fileUrl: "lessons/Sonya/" },
+            { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Sonya/" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "timofey",
+            name: "Тимофей",
+            icon: "",
+            iconImg: "icons/Timofey.png",
+            meetingLink: "",
+            lessons: [{ title: "Материалы к занятию 26.03.26", fileUrl: "lessons/Timofey/" },
+            { 
+                    title: "Домашняя работа", 
+                    files: [
+                        { name: "Страница 1", url: "homework/Timofey/" }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    // ---- ФУНКЦИИ ДЛЯ АНИМАЦИИ ГРАФИКОВ (без изменений) ----
+    function drawGraph(ctx, width, height, funcType, progress) {
+        ctx.clearRect(0, 0, width, height);
+        ctx.save();
+        ctx.strokeStyle = '#aaa';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, height/2);
+        ctx.lineTo(width, height/2);
+        ctx.moveTo(width/2, 0);
+        ctx.lineTo(width/2, height);
+        ctx.stroke();
+        
+        const xMin = -3, xMax = 3, yMin = -2, yMax = 2;
+        const toScreenX = (x) => ((x - xMin) / (xMax - xMin)) * width;
+        const toScreenY = (y) => height - ((y - yMin) / (yMax - yMin)) * height;
+        
+        let yFunc;
+        switch(funcType) {
+            case 'sin': yFunc = x => Math.sin(x); break;
+            case 'cos': yFunc = x => Math.cos(x); break;
+            case 'hyp': yFunc = x => 1.2 / (x + 0.3); break;
+            case 'quad': yFunc = x => x * x / 2.5; break;
+            default: yFunc = x => Math.sin(x);
+        }
+        
+        const maxX = xMin + (xMax - xMin) * progress;
+        ctx.beginPath();
+        ctx.strokeStyle = '#1e3c72';
+        ctx.lineWidth = 2;
+        let first = true;
+        for (let x = xMin; x <= maxX; x += (xMax - xMin) / 150) {
+            let y = yFunc(x);
+            if (isFinite(y) && y >= yMin && y <= yMax) {
+                let sx = toScreenX(x);
+                let sy = toScreenY(y);
+                if (first) {
+                    ctx.moveTo(sx, sy);
+                    first = false;
+                } else {
+                    ctx.lineTo(sx, sy);
+                }
+            } else {
+                first = true;
+            }
+        }
+        ctx.stroke();
+        ctx.restore();
+    }
+    
+    function startLoopingAnimation(canvas, funcType) {
+        let step = 0;
+        const steps = 80;
+        let animFrame;
+        let timeout;
+        function animateStep() {
+            if (step <= steps) {
+                const progress = step / steps;
+                const ctx = canvas.getContext('2d');
+                drawGraph(ctx, canvas.width, canvas.height, funcType, progress);
+                step++;
+                animFrame = requestAnimationFrame(animateStep);
+            } else {
+                cancelAnimationFrame(animFrame);
+                timeout = setTimeout(() => {
+                    step = 0;
+                    animateStep();
+                }, 800);
+            }
+        }
+        animateStep();
+        return () => {
+            cancelAnimationFrame(animFrame);
+            if (timeout) clearTimeout(timeout);
+        };
+    }
+    
+    let stopAnimations = [];
+    
+    function setupCornerGraphs() {
+        const oldGraphs = document.querySelectorAll('.corner-graph');
+        oldGraphs.forEach(el => el.remove());
+        
+        const graphs = [
+            { position: 'top-left', func: 'sin' },
+            { position: 'top-right', func: 'cos' },
+            { position: 'bottom-left', func: 'hyp' },
+            { position: 'bottom-right', func: 'quad' }
+        ];
+        
+        graphs.forEach((cfg) => {
+            const div = document.createElement('div');
+            div.className = `corner-graph ${cfg.position}`;
+            const canvas = document.createElement('canvas');
+            canvas.width = 180;
+            canvas.height = 180;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            div.appendChild(canvas);
+            document.body.appendChild(div);
+            const stop = startLoopingAnimation(canvas, cfg.func);
+            stopAnimations.push(stop);
+        });
+    }
+    
+    function addFlowerPot() {
+        const oldPot = document.querySelector('.flower-pot');
+        if (oldPot) oldPot.remove();
+        const pot = document.createElement('div');
+        pot.className = 'flower-pot';
+        pot.innerHTML = '<img src="a.png" alt="Цветок">';
+        document.body.appendChild(pot);
+    }
+    
+    function removeDecorations() {
+        stopAnimations.forEach(stop => stop());
+        stopAnimations = [];
+        document.querySelectorAll('.corner-graph').forEach(el => el.remove());
+        const pot = document.querySelector('.flower-pot');
+        if (pot) pot.remove();
+    }
+    
+    // Функция отображения главной страницы с учётом картинок
+    function renderMainPage() {
+        removeDecorations();
+        
+        let html = `<h1>Готовимся к ЕГЭ 2026!</h1>
+                    <div class="students-grid">`;
+        for (let student of studentsData) {
+            // Определяем, что показывать в иконке
+            let iconHtml;
+            if (student.iconImg) {
+                iconHtml = `<img src="${escapeHtml(student.iconImg)}" alt="${escapeHtml(student.name)}">`;
+            } else {
+                iconHtml = escapeHtml(student.icon);
+            }
+            html += `
+                <div class="student-card" onclick="navigateToStudent('${student.id}')">
+                    <div class="student-icon">${iconHtml}</div>
+                    <div class="student-name">${escapeHtml(student.name)}</div>
+                </div>
+            `;
+        }
+        document.getElementById('app').innerHTML = html;
+        
+        setupCornerGraphs();
+        addFlowerPot();
+    }
+    
+    // Страница ученика с поддержкой группировки файлов
+    function renderStudentPage(studentId) {
+        removeDecorations();
+        
+        const student = studentsData.find(s => s.id === studentId);
+        if (!student) {
+            renderMainPage();
+            return;
+        }
+        
+        let lessonsHtml = '';
+        if (student.lessons && student.lessons.length > 0) {
+            lessonsHtml = `<ul class="file-list">`;
+            for (let lesson of student.lessons) {
+                if (lesson.fileUrl) {
+                    // Обычная ссылка на один файл
+                    lessonsHtml += `<li><a href="${escapeHtml(lesson.fileUrl)}" target="_blank">📄 ${escapeHtml(lesson.title)}</a></li>`;
+                } else if (lesson.files && lesson.files.length > 0) {
+                    // Группа файлов — раскрывающийся блок
+                    lessonsHtml += `
+                        <details>
+                            <summary>${escapeHtml(lesson.title)}</summary>
+                            <ul>
+                    `;
+                    for (let file of lesson.files) {
+                        lessonsHtml += `<li><a href="${escapeHtml(file.url)}" target="_blank">📄 ${escapeHtml(file.name)}</a></li>`;
+                    }
+                    lessonsHtml += `
+                            </ul>
+                        </details>
+                    `;
+                }
+            }
+            lessonsHtml += `</ul>`;
+        } else {
+            lessonsHtml = `<div class="empty-lessons">📭 Пока нет материалов. Учитель добавит файлы позже.</div>`;
+        }
+        
+        const meetingHtml = student.meetingLink ? 
+            `<a href="${escapeHtml(student.meetingLink)}" target="_blank" class="lesson-link">🔗 Перейти к занятию →</a>` : 
+            `<div style="margin:20px 0; background:#f0f0f0; padding:10px; border-radius:40px;">Ссылка на занятие скоро появится</div>`;
+        
+        // На странице ученика тоже можно показать картинку, если есть
+        let detailIconHtml;
+        if (student.iconImg) {
+            detailIconHtml = `<img src="${escapeHtml(student.iconImg)}" alt="${escapeHtml(student.name)}" style="width:70px; height:70px; object-fit:contain;">`;
+        } else {
+            detailIconHtml = student.icon;
+        }
+        
+        const html = `
+            <div class="student-detail">
+                <div class="student-header">
+                    <div class="student-detail-icon">${detailIconHtml}</div>
+                    <h2 class="student-detail-name">${escapeHtml(student.name)}</h2>
+                </div>
+                ${meetingHtml}
+                <div class="files-section">
+                    <div class="files-title">
+                        <span>📂 Уроки / материалы</span>
+                    </div>
+                    ${lessonsHtml}
+                </div>
+                <a href="javascript:void(0)" onclick="renderMainPage()" class="back-link">← Назад ко всем ученикам</a>
+            </div>
+        `;
+        document.getElementById('app').innerHTML = html;
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    function navigateToStudent(studentId) {
+        const url = new URL(window.location);
+        url.searchParams.set('student', studentId);
+        window.history.pushState({}, '', url);
+        renderStudentPage(studentId);
+    }
+    
+    window.onpopstate = function() {
+        const params = new URLSearchParams(window.location.search);
+        const studentId = params.get('student');
+        if (studentId && studentsData.find(s => s.id === studentId)) {
+            renderStudentPage(studentId);
+        } else {
+            renderMainPage();
+        }
+    };
+    
+    function init() {
+        const params = new URLSearchParams(window.location.search);
+        const studentId = params.get('student');
+        if (studentId && studentsData.find(s => s.id === studentId)) {
+            renderStudentPage(studentId);
+        } else {
+            renderMainPage();
+        }
+    }
+    
+    init();
+</script>
+</body>
+</html>
